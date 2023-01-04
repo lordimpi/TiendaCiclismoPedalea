@@ -38,6 +38,42 @@ namespace Pedalea.WebApp.Controllers
             }
         }
 
+        public IActionResult Create()
+        {
+            Pedido pedido = new();
+            return View(pedido);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Pedido pedido)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    HttpClient client = _httpClientFactory.CreateClient("PedaleaApiPedidos");
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/pedidos/AddPedido", pedido);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string content = await response.Content.ReadAsStringAsync();
+                        if (content != null)
+                        {
+                            Pedido result = JsonSerializer.Deserialize<Pedido>(content, options);
+                            return RedirectToAction(nameof(Index));
+                        }
+                    }
+                    return NotFound();
+                }
+                catch (Exception)
+                {
+                    return NotFound();
+                }
+            }
+            return View(pedido);
+        }
+
+
         [NoDirectAccess]
         public async Task<IActionResult> Delete(int? id)
         {
