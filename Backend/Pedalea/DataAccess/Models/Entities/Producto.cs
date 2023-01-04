@@ -11,6 +11,6 @@ namespace DataAccess.Models.Entities
         public bool IsActive { get; set; }
 
         [JsonIgnore]
-        public Pedido Pedido { get; set; }
+        public List<Pedido> Pedido { get; set; }
     }
 }

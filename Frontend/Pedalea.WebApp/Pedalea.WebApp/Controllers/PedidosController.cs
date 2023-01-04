@@ -38,7 +38,6 @@ namespace Pedalea.WebApp.Controllers
             }
         }
 
-
         [NoDirectAccess]
         public async Task<IActionResult> Delete(int? id)
         {

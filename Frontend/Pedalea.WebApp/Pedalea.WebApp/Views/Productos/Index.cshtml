@@ -34,40 +34,43 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Precio)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.IsActive)
-                            </th>
+                            @*  <th>
+                            @Html.DisplayNameFor(model => model.IsActive)
+                            </th>*@
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Id)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Nombre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Descripcion)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Precio)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IsActive)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-align-justify"></i></a>
-                                    <button data-id="@item.Id" class="btn btn-danger deleteItem" data-bs-toggle="modal"
+                            if (item.IsActive)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descripcion)
+                                    </td>
+                                    <td>
+                                        $@Html.DisplayFor(modelItem => item.Precio)
+                                    </td>
+                                    @*<td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                            </td>*@
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-align-justify"></i></a>
+                                        <button data-id="@item.Id" class="btn btn-danger deleteItem" data-bs-toggle="modal"
                                         data-bs-target="#deleteDialog">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
                         }
                     </tbody>
                 </table>
@@ -79,7 +82,9 @@
 <partial name="_DeleteDialog" />
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="/js/deleteDialog.js"></script>
 

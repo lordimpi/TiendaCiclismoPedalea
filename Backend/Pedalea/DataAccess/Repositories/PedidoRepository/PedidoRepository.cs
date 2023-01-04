@@ -30,7 +30,6 @@ namespace DataAccess.Repositories.PedidoRepository
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Transaction = sqlTransaction;
                 sqlCommand.Parameters.Clear();
-                sqlCommand.Parameters.Add("ppId", SqlDbType.Int).Value = pedido.ProductoId;
                 sqlCommand.Parameters.Add("pNumeroPedido", SqlDbType.Int).Value = pedido.NumeroPedido;
                 sqlCommand.Parameters.Add("pFecha", SqlDbType.DateTime).Value = pedido.Fecha;
                 sqlCommand.Parameters.Add("pDireccionEnvio", SqlDbType.VarChar).Value = pedido.DireccionEnvio;
@@ -129,8 +128,8 @@ namespace DataAccess.Repositories.PedidoRepository
                         Estado = sqlDataReader["pd_estado"].ToString(),
                         IsActive = Convert.ToBoolean(sqlDataReader["pd_isActive"]),
                     };
-                    Producto p = await _productoRepository.GetProductoAsync(Convert.ToInt32(sqlDataReader["p_id"]));
-                    pedido.Productos.Add(p);
+                    //Producto p = await _productoRepository.GetProductoAsync(Convert.ToInt32(sqlDataReader["p_id"]));
+                    //pedido.Productos.Add(p);
                 }
             }
             finally
@@ -173,8 +172,8 @@ namespace DataAccess.Repositories.PedidoRepository
                         Estado = sqlDataReader["pd_estado"].ToString(),
                         IsActive = Convert.ToBoolean(sqlDataReader["pd_isActive"]),
                     };
-                    Producto p = await _productoRepository.GetProductoAsync(Convert.ToInt32(sqlDataReader["p_id"]));
-                    pedido.Productos.Add(p);
+                    //Producto p = await _productoRepository.GetProductoAsync(Convert.ToInt32(sqlDataReader["p_id"]));
+                    //pedido.Productos.Add(p);
                     Pedidos.Add(pedido);
                 }
             }
@@ -208,7 +207,6 @@ namespace DataAccess.Repositories.PedidoRepository
                 sqlCommand.Transaction = sqlTransaction;
                 sqlCommand.Parameters.Clear();
                 sqlCommand.Parameters.Add("pdId", SqlDbType.Int).Value = id;
-                sqlCommand.Parameters.Add("pId", SqlDbType.Int).Value = pedido.ProductoId;
                 sqlCommand.Parameters.Add("pNumeroPedido", SqlDbType.Int).Value = pedido.NumeroPedido;
                 sqlCommand.Parameters.Add("pFecha", SqlDbType.Date).Value = pedido.Fecha;
                 sqlCommand.Parameters.Add("pDireccionEnvio", SqlDbType.VarChar).Value = pedido.DireccionEnvio;

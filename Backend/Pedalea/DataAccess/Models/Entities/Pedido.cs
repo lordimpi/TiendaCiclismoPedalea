@@ -11,8 +11,6 @@ namespace DataAccess.Models.Entities
         public string Estado { get; set; }
         public bool IsActive { get; set; }
 
-        public int ProductoId { get; set; }
-
         public List<Producto> Productos { get; set; } = new List<Producto>();
     }
 }

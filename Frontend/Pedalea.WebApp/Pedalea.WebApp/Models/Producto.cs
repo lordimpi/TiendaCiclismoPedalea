@@ -16,7 +16,8 @@ namespace Pedalea.WebApp.Models
         [MaxLength(250, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres")]
         public string Descripcion { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C}")]
+        //[DisplayFormat(DataFormatString = "{0:C}")]
+        [DisplayFormat(DataFormatString = "{0:n0}", ApplyFormatInEditMode = true)]
         [Display(Name = "Precio")]
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public decimal Precio { get; set; }
@@ -24,6 +25,6 @@ namespace Pedalea.WebApp.Models
         [Display(Name = "Estado")]
         public bool IsActive { get; set; }
 
-        public Pedido Pedido { get; set; }
+        public List<Pedido> Pedido { get; set; }
     }
 }
